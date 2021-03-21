@@ -10,8 +10,8 @@ def main():
     # cgitb.enable(display=1, logdir="/logs", context=5, format="html")
     connectionToDatabase = ""
     form = cgi.FieldStorage()
-    searchTerm = form['search_term'].value
-    # searchTerm = "gene"
+    # searchTerm = form['search_term'].value
+    searchTerm = "gene"
     uniqueNameResults = []
     valueResults = []
     # This line tells the template loader where to search for template files
@@ -19,8 +19,9 @@ def main():
 
     try:
         conn = mysql.connector.connect(
-                  user='mmorro14', password='DT2112', host='localhost', database='mmorro14_chado')
-              curs = conn.cursor()
+            user='mmorro14', password='DT2112', host='localhost', database='mmorro14_chado')
+        curs = conn.cursor()
+
     except:
         connectionToDatabase = "Connection and Query Failed"
         print("Content-Type: text/html\n\n")
@@ -68,7 +69,7 @@ def main():
             print(connectionToDatabase)
             # WHERE THE RETURN/GOES NEEDS TO BE
     except KeyError:
-         try:
+        try:
             select_stmt = "SELECT f.uniquename, product.value FROM feature f JOIN featureprop product ON f.feature_id=product.feature_id JOIN cvterm productprop ON product.type_id=productprop.cvterm_id WHERE productprop.name = %(product_name)s AND product.value LIKE %(product_value)s LIMIT 5"
             curs.execute(select_stmt, {
                 'product_name': 'gene_product_name', 'product_value': '%' + searchTerm + '%'})
@@ -100,15 +101,14 @@ def main():
             else:
                 return json.dumps(valueResults)
 
-        except:
-            connectionToDatabase = "Connection Succeded but Query Failed"
-            print("Content-Type: text/html\n\n")
-            print(connectionToDatabase)
-            # WHERE THE RETURN/GOES NEEDS TO BE
+    except:
+        connectionToDatabase = "Connection Succeded but Query Failed"
+        print("Content-Type: text/html\n\n")
+        print(connectionToDatabase)
+        # WHERE THE RETURN/GOES NEEDS TO BE
 
     curs.close()
     conn.close()
-
 
 
 if __name__ == '__main__':
