@@ -1,29 +1,40 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
+<html lang="en">
 
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title></title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="">
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script>
-			window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')
-		</script>
+		<meta charset="utf-8" />
+		<title>AJAX demo</title>
+		<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+		<link rel="stylesheet" type="text/css" href="css/search_product.css" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script type="text/javascript" src="js/search.js"></script>
 	</head>
 
-	<body>
-		<!--[if lt IE 7]>
-			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-		<![endif]-->
+	<body id="main">
 
-		<script src="" async defer></script>
+		<h1>E. coli gene search</h1>
+		<form name="gene_search" id="gene_search" action="">
+			<input name="search_term" type="search" value="" autofocus="autofocus" placeholder="Enter a search term" />
+			<input name="submit" type="submit" id="submit" value="submit">
+		</form>
+		<section id='results'>
+			<p>
+				<span id='match_count'>0</span> match(es) found.
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<td>Locus tag</td>
+						<td>Product</td>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- this will be filled in by javascript when there are results -->
+				</tbody>
+		</section>
+
 	</body>
 
 </html>
