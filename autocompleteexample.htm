@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+
+   <head>
+      <meta charset="utf-8">
+      <title>jQuery UI Autocomplete functionality</title>
+      <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+      <style>
+         #project-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 1em;
+         }
+
+         .project-spacer {
+            display: block;
+            font-weight: bold;
+            margin: 2em;
+            padding-top: 2em;
+         }
+
+         #project-icon {
+            float: left;
+            height: 32px;
+            width: 32px;
+         }
+
+         #project-description {
+            margin: 0;
+            padding: 0;
+         }
+
+         #project-description-2 {
+            margin: 5;
+            padding: 0;
+            box-shadow: darkseagreen;
+         }
+      </style>
+
+      <!-- Javascript -->
+      <!DOCTYPE html>
+      <html>
+
+         <head>
+            <title>jQuery UI : Create an AutoComplete Widget using a Function </title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/hot-sneaks/jquery-ui.css" />
+            <script src="http://code.jquery.com/jquery-2.1.3.js"></script>
+            <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+            <script>
+               $(document).ready(function () {
+                  $("#txtSearch").autocomplete({
+                     source: "/ajax_calls/search/",
+                     minLength: 2,
+                     open: function () {
+                        setTimeout(function () {
+                           $('.ui-autocomplete').css('z-index', 99);
+                        }, 0);
+                     }
+                  });
+               });
+               $(document).ready(function () {
+                  $("#gene_search").autocomplete("enable");
+                  $("#gene_search").autocomplete("search", "");
+                  $("#gene_search").autocomplete({
+                     minLength: 1,
+                     fieldText = $("gene_search").serialize(),
+                     source: function (req, resp) {
+                        $.ajax({
+                           url: './search_gene.cgi',
+                           dataType: 'jsonp',
+                           data: {
+                              fieldText: req.term
+                           },
+                           success: function (data, textStatus, jqXHR) {
+                              processJSON(data);
+                              //response(data)
+                           },
+                           error: function (jqXHR, textStatus, errorThrown) {
+                              alert("Failed to perform gene search! textStatus: (" +
+                                 textStatus +
+                                 ") and errorThrown: (" + errorThrown + ")");
+                           }
+                        });
+
+                     },
+
+                     select: function (event, ui) {
+                        var availableTags = ui.item.product;
+                     }
+
+                  });
+               });
+
+               function processJSON(data) {
+                  // set the span that lists the match count
+                  $("#match_count").text(data.match_count)
+
+                  // this will be used to keep track of row identifiers
+                  var next_row_num = 1
+
+                  // iterate over each match and add a row to the result table for each
+                  $.each(data.matches, function (i, item) {
+                     var this_row_id = "result_row_" + next_row_num++
+
+                     // create a row and append it to the body of the table
+                     $("<tr/>", {
+                        id: this_row_id
+                     }).appendTo("tbody")
+
+                     // add the locus column
+                     $("<td/>", {
+                        text: item.locus_id
+                     }).appendTo("#" + this_row_id)
+
+                     // add the product column
+                     $("<td/>", {
+                        text: item.product
+                     }).appendTo("#" + this_row_id)
+                  })
+
+                  // now show the result section that was previously hidden
+                  $("#results").show()
+               }
+            </script>
+         </head>
+
+
+   <body>
+
+      <label for="autocomplete">Select a programming language: </label>
+      <input id="autocomplete">
+      <!-- <script>
+            $( "#autocomplete" ).autocomplete({
+              source: [ "c++", "java", "php", "coldfusion", "javascript", "asp", "ruby" ]
+            });
+            </script> -->
+
+
+      <section class="project-spacer">
+         <form id="target">
+
+            <label for="autoSuggest">City Name beginning with C: </label>
+            <input id="autoSuggest" /><br>
+            Label of City : <strong id="cityLabel"></strong>
+            <input name="gene_search" type="submit" id="submit" value="submit">
+            <label for="gene_search" value="Hello there">
+               <input type="submit" value="Go">
+         </form>
+      </section>
+      <br /> <br /> <br />
+      <table>
+         <thead>
+            <tr>
+               <td>Locus tag</td>
+               <td>Product</td>
+            </tr>
+         </thead>
+         <tbody>
+            <!-- this will be filled in by javascript when there are results -->
+         </tbody>
+
+         <form id=”search” method=”POST” action=”{% url ‘search’ %}”>
+            <p id="match_count"></p>
+            <input type=”text” class=”form-control” id=”txtSearch” name=”txtSearch”>
+            <button type=”submit” class=”btn btn-default btn-submit”>Submit</button>
+         </form>
+   </body>
+
+</html>
