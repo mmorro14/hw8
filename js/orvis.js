@@ -50,6 +50,8 @@ function processJSON(data) {
 // run our javascript once the page is ready
 $(document).ready(function () {
 	// define what should happen when a user clicks submit on our search form
+	$("#results").hide()
+	$("tbody").empty()
 	$("#submit").click(function () {
 		runSearch()
 		return false // prevents 'normal' form submission
