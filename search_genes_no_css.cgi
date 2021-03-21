@@ -4,6 +4,8 @@ import cgi
 import mysql.connector
 import cgitb
 
+import javascript
+
 
 def main():
 
