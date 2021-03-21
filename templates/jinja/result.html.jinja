@@ -1,0 +1,23 @@
+{% extends "base.html.jinja" %}
+<section class="flex-sect">
+	<div class="container-width">
+		<div class="flex-title">
+			<h1>Search Results ({{ number }}) for:</h1>
+			<h2><i>{{ placeholder }}</i></h2>
+		</div>
+		<div>
+			<table>
+				<tr>
+					<th>Unique Name</th>
+					<th>Value</th>
+				</tr>
+				{% for uniqueNameResults, valueResults in results %}
+				<tr>
+					<td class="id">{{uniqueNameResults}}</td>
+					<td class="id">{{valueResults}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</section>
