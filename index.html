@@ -1,80 +1,43 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 <html>
 
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title></title>
+		<title>mmorro14-HW8</title>
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="http://bfx3.aap.jhu.edu/mmorro14/unit06/css/hw6.css" type="text/css" />
-		<script src="http://bfx3.aap.jhu.edu/jorvis1/unit08/js/search.js"></script>
+		<!-- <link rel="stylesheet" href="http://bfx3.aap.jhu.edu/mmorro14/unit06/css/hw6.css" type="text/css" /> -->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="http://bfx3.aap.jhu.edu/mmorro14/unit08/js/autocomplete.js"></script>
+
+
 	</head>
 
 	<body>
-		<!--[if lt IE 7]>
-			<p class="browsehappy">
-				You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve
-				your experience.
+		<h1>mmorro14 - HW8</h1>
+		<form name="gene_search" id="gene_search" action="">
+			<input name="search_term" type="search" value="" placeholder="Enter a search term" />
+			<input name="submit" id="submit" value="submit">
+		</form>
+		<section id='results'>
+			<p>
+				<span id='match_count'>0</span> match(es) found.
 			</p>
-		<![endif]-->
-		<script src="" async defer></script>
-		<div data-gjs="navbar" class="navbar">
-			<div class="navbar-container">
-				<div id="i12fi" class="navbar-burger">
-					<div class="navbar-burger-line"></div>
-					<div class="navbar-burger-line"></div>
-					<div class="navbar-burger-line"></div>
-				</div>
-				<div data-gjs="navbar-items" class="navbar-items-c">
-					<nav data-gjs="navbar-menu" class="navbar-menu" id="i2rve">
-						<a href="http://bfx3.aap.jhu.edu/mmorro14/unit06/search.html" class="navbar-menu-link"
-							id="iucgr">HW 6 Home</a>
-						<a href="http://bfx3.aap.jhu.edu/mmorro14/unit06/search_plain.html" class="navbar-menu-link"
-							id="izbfi">HW6 No CSS Styling</a>
-					</nav>
-				</div>
-			</div>
-		</div>
-		<section class="flex-sect">
-			<div class="container-width">
-				<div class="flex-title">
-					<h1>mmorro14 - HW6</h1>
-				</div>
-				<div class="cards" id="card_css">
-					<form name="gene_search" id="gene_search" action="">
-						<input name="search_term" type="search" value="" autofocus="autofocus"
-							placeholder="Enter a search term" />
-						<input name="submit" type="submit" id="submit" value="submit">
-					</form>
-					<section id='results'>
-						<p>
-							<span id='match_count'>0</span> match(es) found.
-						</p>
-						<table>
-							<thead>
-								<tr>
-									<td>Locus tag</td>
-									<td>Product</td>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- this will be filled in by javascript when there are results -->
-							</tbody>
-					</section>
-				</div>
-			</div>
+			<table>
+				<thead>
+					<tr>
+						<td>Locus tag</td>
+						<td>Product</td>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- this will be filled in by javascript when there are results -->
+				</tbody>
 		</section>
-		<div id="output" style="min-height: 200px; white-space: pre; border: 1px solid black"
-			ondragenter="document.getElementById('output').textContent = ''; event.stopPropagation(); event.preventDefault();"
-			ondragover="event.stopPropagation(); event.preventDefault();" ondrop="event.stopPropagation(); event.preventDefault();
-         dodrop(event);">
-			DROP FILES HERE FROM FINDER OR EXPLORER
-		</div>
 	</body>
 
 </html>

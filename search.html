@@ -12,56 +12,97 @@
                 background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
             }
         </style>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')
+        </script>
+
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
         <script>
-            var fooElm = $('#foo'); // fetches a reference to any element with an id of 'foo'
-            var geneElms = $('section.gene'); // gets refs to all <section> elements of class 'gene'
-            //begin main function
-            jqueryNoConflict(document).ready(function () {
-                retriveData();
-            });
-            //end main function
             $(function () {
-                function log(message) {
-                    $("<div/>").text(message).prependTo("#log");
-                    $("#log").attr("scrollTop", 0);
-                }
 
-                $.ajax({
-                    url: "http://bfx3.aap.jhu.edu/mmorro14/unit08/assets/search_product.cgi",
-                    dataType: "json",
-                    statusCode: {
-                        404: function () {
-                            alert("cgi failed");
-                        }
-                    },
-                    success: function (request, response) {
-                        var data = $("geoname", request).map(function () {
-                            return {
-                                value: $("name", this).text() + ", " +
-                                    ($.trim($("countryName", this).text()) ||
-                                        "(unknown country)"),
-                                id: $("geonameId", this).text()
-                            };
-                        }).get();
-                        $("#birds").autocomplete({
-                            source: data,
-                            minLength: 1,
+                        // Single Select
+                        $("#autocomplete").autocomplete({
+                            source: function (request, response) {
+                                // Fetch data
+                                $.ajax({
+                                    url: "fetchData.php",
+                                    type: 'post',
+                                    dataType: "json",
+                                    data: {
+                                        search: request.term
+                                    },
+                                    success: function (data) {
+                                        response(data);
+                                    }
+
+                                });
+                            },
                             select: function (event, ui) {
-                                log(ui.item ?
-                                    "Selected: " + ui.item.value + ", geonameId: " +
-                                    ui.item.id :
-                                    "Nothing selected, input was " + this.value);
-                            }
+                                // Set selection
+                                $('#autocomplete').val(ui.item.label); // display the selected text
+                                $('#selectuser_id').val(ui.item.value); // save selected id to input
+                                return false;
+                            },
+                            focus: function (event, ui) {
+                                $("#autocomplete").val(ui.item.label);
+                                $("#selectuser_id").val(ui.item.value);
+                                return false;
+                            },
                         });
-                    },
-                    error: function () {
-                        alert("page not found");
-                    }
-                });
-            });
+                        var fooElm = $('#foo'); // fetches a reference to any element with an id of 'foo'
+                        var geneElms = $('section.gene'); // gets refs to all <section> elements of class 'gene'
+                        //begin main function
+                        jqueryNoConflict(document).ready(function () {
+                            retriveData();
+                        });
+                        //end main function
+                        $(function () {
+                            function log(message) {
+                                $("<div/>").text(message).prependTo("#log");
+                                $("#log").attr("scrollTop", 0);
+                            }
+
+                            $.ajax({
+                                url: "http://bfx3.aap.jhu.edu/mmorro14/unit08/assets/search_product.cgi",
+                                dataType: "json",
+                                statusCode: {
+                                    404: function () {
+                                        alert("cgi failed");
+                                    }
+                                },
+                                success: function (request, response) {
+                                    var data = $("geoname", request).map(function () {
+                                        return {
+                                            value: $("name", this).text() + ", " +
+                                                ($.trim($("countryName", this).text()) ||
+                                                    "(unknown country)"),
+                                            id: $("geonameId", this).text()
+                                        };
+                                    }).get();
+                                    $("#birds").autocomplete({
+                                        source: data,
+                                        minLength: 1,
+                                        select: function (event, ui) {
+                                            log(ui.item ?
+                                                "Selected: " + ui.item.value +
+                                                ", geonameId: " +
+                                                ui.item.id :
+                                                "Nothing selected, input was " +
+                                                this.value);
+                                        }
+                                    });
+                                },
+                                error: function () {
+                                    alert("page not found");
+                                }
+                            });
+                        });
         </script>
     </head>
 
