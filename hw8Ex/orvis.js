@@ -1,3 +1,4 @@
+// this function executes our search via an AJAX call
 function runSearch(term) {
 	// hide and clear the previous results, if any
 	$("#results").hide()
@@ -7,7 +8,7 @@ function runSearch(term) {
 	var frmStr = $("#gene_search").serialize()
 
 	$.ajax({
-		url: "./search_genes.cgi",
+		url: "./search_product.cgi",
 		dataType: "json",
 		data: frmStr,
 		success: function (data, textStatus, jqXHR) {
@@ -17,21 +18,6 @@ function runSearch(term) {
 			alert("Failed to perform gene search! textStatus: (" + textStatus + ") and errorThrown: (" + errorThrown + ")")
 		},
 	})
-}
-
-function clickedSearch(data) {
-	$("#gene_search").alert(data)
-	$("#results").show()
-}
-
-function alertMessage(hours, msg, hours) {
-	var hoursPerDay = hours
-	var hello = "There are " + hours + " hours per day: Dumb " + msg
-
-	// this writes content to the browser window
-	hello.appendTo("h1")
-	// this adds content to a pop-up window
-	alert(hello)
 }
 
 // this processes a passed JSON structure representing gene matches and draws it
@@ -65,27 +51,7 @@ function processJSON(data) {
 $(document).ready(function () {
 	// define what should happen when a user clicks submit on our search form
 	$("#submit").click(function () {
-		$("#gene_search").text(data.gene_search)
 		runSearch()
 		return false // prevents 'normal' form submission
 	})
-})
-
-$("#autocomplete").autocomplete({
-	lookup: function (query, done) {
-		// Do Ajax call or lookup locally, when done,
-		// call the callback and pass your results:
-		var result = {
-			suggestions: [
-				{ value: "United Arab Emirates", data: "AE" },
-				{ value: "United Kingdom", data: "UK" },
-				{ value: "United States", data: "US" },
-			],
-		}
-
-		done(result)
-	},
-	onSelect: function (suggestion) {
-		alert("You selected: " + suggestion.value + ", " + suggestion.data)
-	},
 })

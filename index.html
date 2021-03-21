@@ -4,6 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
+
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -32,15 +33,10 @@
 				</div>
 				<div data-gjs="navbar-items" class="navbar-items-c">
 					<nav data-gjs="navbar-menu" class="navbar-menu" id="i2rve">
-						<a href="http://bfx3.aap.jhu.edu/mmorro14/unit06/search.html" class="navbar-menu-link" id="iucgr"
-							>HW 6 Home</a
-						>
-						<a
-							href="http://bfx3.aap.jhu.edu/mmorro14/unit06/search_plain.html"
-							class="navbar-menu-link"
-							id="izbfi"
-							>HW6 No CSS Styling</a
-						>
+						<a href="http://bfx3.aap.jhu.edu/mmorro14/unit06/search.html" class="navbar-menu-link"
+							id="iucgr">HW 6 Home</a>
+						<a href="http://bfx3.aap.jhu.edu/mmorro14/unit06/search_plain.html" class="navbar-menu-link"
+							id="izbfi">HW6 No CSS Styling</a>
 					</nav>
 				</div>
 			</div>
@@ -51,40 +47,35 @@
 					<h1>mmorro14 - HW6</h1>
 				</div>
 				<div class="cards" id="card_css">
-					<form
-						class="form"
-						id="search_term_form"
-						name="search_genes"
-						method="post"
-						action="http://bfx3.aap.jhu.edu/mmorro14/unit06/search_genes.cgi"
-					>
-						<legend style="padding-bottom: 10px">Chado Database Search Query</legend>
-						<div class="form-group">
-							<label class="label" id="search_term_label" style="padding-bottom: 5px">Search Term</label>
-							<input
-								class="input"
-								name="searchTerm"
-								placeholder="Enter Gene Product"
-								autofocus="”autofocus”"
-								required
-							/>
-						</div>
-						<div class="form-group">
-							<button type="submit" class="button" id="search_term_submit">Send</button>
-						</div>
+					<form name="gene_search" id="gene_search" action="">
+						<input name="search_term" type="search" value="" autofocus="autofocus"
+							placeholder="Enter a search term" />
+						<input name="submit" type="submit" id="submit" value="submit">
 					</form>
+					<section id='results'>
+						<p>
+							<span id='match_count'>0</span> match(es) found.
+						</p>
+						<table>
+							<thead>
+								<tr>
+									<td>Locus tag</td>
+									<td>Product</td>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- this will be filled in by javascript when there are results -->
+							</tbody>
+					</section>
 				</div>
 			</div>
 		</section>
-		<div
-			id="output"
-			style="min-height: 200px; white-space: pre; border: 1px solid black"
+		<div id="output" style="min-height: 200px; white-space: pre; border: 1px solid black"
 			ondragenter="document.getElementById('output').textContent = ''; event.stopPropagation(); event.preventDefault();"
-			ondragover="event.stopPropagation(); event.preventDefault();"
-			ondrop="event.stopPropagation(); event.preventDefault();
-         dodrop(event);"
-		>
+			ondragover="event.stopPropagation(); event.preventDefault();" ondrop="event.stopPropagation(); event.preventDefault();
+         dodrop(event);">
 			DROP FILES HERE FROM FINDER OR EXPLORER
 		</div>
 	</body>
+
 </html>
