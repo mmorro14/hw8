@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>AJAX demo</title>
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://bfx3.aap.jhu.edu/mmorro14/unit06/css/hw6.css" type="text/css">
+    <script type="text/javascript" src="./javascript/search.js"></script>
+
+    <!-- Source: https://jqueryui.com/autocomplete/#remote-jsonp -->
+    <style>
+        .ui-autocomplete-loading {
+          background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            function log( message ) {
+            $( "<div>" ).text( message ).prependTo( "#log" );
+            $( "#log" ).scrollTop( 0 );
+            }
+        
+            $( "#birds" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax( {
+                url: "search.php",
+                dataType: "jsonp",
+                data: {
+                    term: request.term
+                },
+                success: function( data ) {
+                    response( data );
+                }
+                } );
+            },
+            minLength: 2,
+            select: function( event, ui ) {
+                log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+            }
+            } );
+        } );
+  </script>
+</head>
+
+<!-- <body>
+    <div data-gjs="navbar" class="navbar">
+        <div class="navbar-container">
+            <div id="i12fi" class="navbar-burger">
+                <div class="navbar-burger-line">
+                </div>
+                <div class="navbar-burger-line">
+                </div>
+                <div class="navbar-burger-line">
+                </div>
+            </div>
+            <div data-gjs="navbar-items" class="navbar-items-c">
+                <nav data-gjs="navbar-menu" class="navbar-menu" id="i2rve">
+                    <a href="http://bfx3.aap.jhu.edu/mmorro14/unit06/search.html" class="navbar-menu-link" id="iucgr">HW 6 Home</a>
+                    <a href="http://bfx3.aap.jhu.edu/mmorro14/unit06/search_plain.html" class="navbar-menu-link" id="izbfi">HW6 No CSS Styling</a>
+                </nav>
+            </div>
+        </div>
+    </div>    
+    <section class="flex-sect">
+        <div class="container-width">
+            <div class="flex-title">
+                <h1>mmorro14 - HW6</h1>
+            </div>
+            <div class="cards" id="card_css">
+                <form name="gene_search" id="gene_search" action="">
+                    <legend style="padding-bottom: 10px;">Chado Database Search Query</legend>
+                    <div class="form-group">
+                        <form name="gene_search" id="gene_search" action="">
+                            <input name="search_term" type="search" value="" autofocus="autofocus" placeholder="Enter a search term"/>
+                            <input name="submit" type="submit" id="submit" value="submit">
+                        </form>
+                        <p>
+                            <span id='match_count'>0</span> match(es) found.
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <section id='results'>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Locus tag</td>
+                        <td>Product</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        this will be filled in by javascript when there are results
+                    </tbody>
+            </section>
+
+                commented out
+                <form class="form" id="search_term_form" name='search_genes' method='post' action='http://bfx3.aap.jhu.edu/mmorro14/unit06/search_genes.cgi'>
+                    <legend style="padding-bottom: 10px;">Chado Database Search Query</legend>
+                    <div class="form-group">
+                        <label class="label" id="search_term_label" style="padding-bottom: 5px;">Search Term</label>
+                        <input class="input" name="searchTerm" placeholder="Enter Gene Product" autofocus=”autofocus” required />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="button" id="search_term_submit">Send</button>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+</body> -->
+
+<body>
+    <div data-gjs="navbar" class="navbar">
+        <div class="navbar-container">
+            <div id="i12fi" class="navbar-burger">
+                <div class="navbar-burger-line">
+                </div>
+                <div class="navbar-burger-line">
+                </div>
+                <div class="navbar-burger-line">
+                </div>
+            </div>
+            <div data-gjs="navbar-items" class="navbar-items-c">
+                <nav data-gjs="navbar-menu" class="navbar-menu" id="i2rve">
+                    <a href="http://bfx3.aap.jhu.edu/mmorro14/unit06/search.html" class="navbar-menu-link" id="iucgr">HW 6 Home</a>
+                    <a href="http://bfx3.aap.jhu.edu/mmorro14/unit06/search_plain.html" class="navbar-menu-link" id="izbfi">HW6 No CSS Styling</a>
+                </nav>
+            </div>
+        </div>
+    </div>    
+    <section class="flex-sect">
+        <div class="container-width">
+            <div class="flex-title">
+                <h1>mmorro14 - HW6</h1>
+            </div>
+            <div class="cards" id="card_css">
+                <form name="gene_search" id="gene_search" action="">
+                    <legend style="padding-bottom: 10px;">Chado Database Search Query</legend>
+                    <div class="form-group">
+                        <form name="gene_search" id="gene_search" action="">
+                            <input name="search_term" type="search" value="" autofocus="autofocus" placeholder="Enter a search term"/>
+                            <input name="submit" type="submit" id="submit" value="submit">
+                        </form>
+                        <p>
+                            <span id='match_count'>0</span> match(es) found.
+                        </p>
+                    </div>
+                    <div class="ui-widget">
+  <label for="birds">Birds: </label>
+  <input id="birds">
+</div>
+ 
+<div class="ui-widget" style="margin-top:2em; font-family:Arial">
+  Result:
+  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+</div>
+ 
+                </form>
+            </div>
+
+            <section id='results'>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Locus tag</td>
+                        <td>Product</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <!-- this will be filled in by javascript when there are results -->
+                    </tbody>
+            </section>
+                <!-- <form class="form" id="search_term_form" name='search_genes' method='post' action='http://bfx3.aap.jhu.edu/mmorro14/unit06/search_genes.cgi'>
+                    <legend style="padding-bottom: 10px;">Chado Database Search Query</legend>
+                    <div class="form-group">
+                        <label class="label" id="search_term_label" style="padding-bottom: 5px;">Search Term</label>
+                        <input class="input" name="searchTerm" placeholder="Enter Gene Product" autofocus=”autofocus” required />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="button" id="search_term_submit">Send</button>
+                    </div> -->
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

@@ -22,6 +22,6 @@ The following exercise should be performed on the class server and will be check
 In the lectures from this week I modified that code to show how to perform that search as an AJAX call
 that returned and parsed JSON formatted results and display them on the browser. That code can be found on the server here:
 
-url(/var/www/html/mmorro14/unit08)
+[/var/www/html/mmorro14/unit08](/var/www/html/mmorro14/unit08)
 
-Make a copy of that directory into your web area (unless you want to use your own). Read the jQuery documentation on the 'autocomplete' function here: http://jqueryui.com/demos/autocomplete/ Then modify the unit08 code I provided to add auto-complete functionality to the search box. The source of data should still be the Genbank file or a database search. That is, don't take the easier way out and hard-code a list of terms in a Javascript array. Limit the number of rows returned to 5 so that large lists aren't returned. As always, use internet searches, the forums, office hours and e-mail if you run into any problems.
+Make a copy of that directory into your web area (unless you want to use your own). Read the jQuery documentation on the 'autocomplete' function here: <http://jqueryui.com/demos/autocomplete/> Then modify the unit08 code I provided to add auto-complete functionality to the search box. The source of data should still be the Genbank file or a database search. That is, don't take the easier way out and hard-code a list of terms in a Javascript array. Limit the number of rows returned to 5 so that large lists aren't returned. As always, use internet searches, the forums, office hours and e-mail if you run into any problems.
